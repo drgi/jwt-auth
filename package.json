@@ -2,10 +2,33 @@
   "name": "jwt-auth",
   "version": "1.0.0",
   "description": "jwt auth test",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "test": "better-npm-run test"
+  },
+  "betterScripts": {
+    "test": {
+      "command": "ava",
+      "env": {
+        "JWT_connection": "./tests/__data"
+      }
+    }
+  },
+  "ava": {
+    "files":["!tests/__data"]
   },
   "author": "Dr",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "better-npm-run": "^0.1.1",
+    "express": "^4.17.1",
+    "lodash": "^4.17.20",
+    "nodemon": "^2.0.7",
+    "rc": "^1.2.8"
+  },
+  "devDependencies": {
+    "ava": "^3.15.0",
+    "supertest": "^6.1.3"
+  }
 }
