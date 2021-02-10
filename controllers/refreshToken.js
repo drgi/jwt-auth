@@ -9,13 +9,13 @@ let refreshTokens = require(resolve(
     'refreshTokens.js'
 ))
 
-function add(data) {
+async function add(data) {
     return refreshTokens.push(data)
 }
-function findByToken(query) {
+async function findByToken(query) {
     return findEntry(refreshTokens, query)
 }
-function remove(query) {
+async function remove(query) {
     refreshTokens = reject(refreshTokens, query)
 }
 module.exports = {

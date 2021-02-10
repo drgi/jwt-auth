@@ -65,15 +65,19 @@ test('Multiple refresh token are valid', async t => {
 })
 
 test('Refresh Token become invalid after logout', async t => {
-    const res = await app.post('/auth/logout').set('Authorization', `Bearer ${issueToken({id: '3'})}`);
+    const app2 = testAgent(createApp())
+    const res = await app2.post('/auth/logout').set('Authorization', `Bearer ${issueToken({id: '3'})}`);
     t.is(res.status, 200)
     
+    const refreshToken = 'TEST_REFRESH_LOGOUT'
+    const refRes = await app2.post('/auth/refresh').send({id: '3', refreshToken})
+    t.is(refRes.status, 404)
     
 })
 
-test('Refresh with LogOut User', async t => {
-    const refreshToken = 'TEST_REFRESH_LOGOUT'
-    const refRes = await app.post('/auth/refresh').send({id: '3', refreshToken})
-    t.is(refRes.status, 200)
-})
+// test('Refresh with LogOut User', async t => {
+//     const refreshToken = 'TEST_REFRESH_LOGOUT'
+//     const refRes = await app.post('/auth/refresh').send({id: '3', refreshToken})
+//     t.is(refRes.status, 200)
+// })
 

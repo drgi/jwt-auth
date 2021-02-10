@@ -13,8 +13,8 @@ router.get('/user/:id', async (req, res) => {
 
 })
 
-router.get('/allusers', (req, res) => {
-    const data = usersDb.allUsers()
+router.get('/allusers', async (req, res) => {
+    const data = await usersDb.allUsers()
     res.status(200).json(data)
 })
 

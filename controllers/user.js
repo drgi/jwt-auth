@@ -9,11 +9,11 @@ const users = require(resolve(
     'users.js'
 ))
 
-function allUsers() {
+async function allUsers() {
     return users
 }
 
-function findById(id) {
+async function findById(id) {
     return findEntry(users, id)
 }
 module.exports = {
