@@ -2,11 +2,14 @@ const express = require('express');
 const router = express.Router();
 const usersDb = require('../controllers/user')
 
-router.get('/user/:id', (req, res) => {
+router.get('/user/:id', async (req, res) => {
     console.log(req.params)
-    const user = usersDb.findById(req.params)
-    console.log(user) 
-    res.status(200).json(user)
+    const user = await usersDb.findById(req.params)
+    console.log('User:',user)
+    if (!user) {
+        return res.status(404).json({error: 'Invalid id'})
+    } 
+    return res.status(200).json(user)
 
 })
 
